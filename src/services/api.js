@@ -8,7 +8,8 @@ const callToApi = ()=>{
                 "id" : adalaber.id,
                 "name" : adalaber.name,
                 "counselor" : adalaber.counselor,
-                "speciality" : adalaber.speciality
+                "speciality" : adalaber.speciality,
+                "social_networks" : adalaber.social_networks
             }
 
             return filteredAdalaber;

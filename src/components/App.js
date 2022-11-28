@@ -39,6 +39,12 @@ function App() {
  };
 
   // FUNCIONES Y VARIABLES QUE AYUDEN A RENDERIZAR HTML
+  function renderSocialNetworks(socialNetworks){
+    return socialNetworks.map((socialNetwork) => {
+        return (<a target="_blank" href={socialNetwork.url}>{socialNetwork.name}</a>);
+    });
+  }
+
   const renderAdalabers = data
   .filter ((data)=>teacherFilter === 'Escoge una opción' || 
                             data.counselor === teacherFilter)
@@ -49,6 +55,7 @@ function App() {
             <td>{adalaber.name}</td>
             <td>{adalaber.counselor}</td>
             <td>{adalaber.speciality}</td>
+            <td>{renderSocialNetworks(adalaber.social_networks)}</td>
         </tr>
     )
   })
@@ -59,15 +66,16 @@ function App() {
     <div className="App">
       <h1 className="title">Adalabers</h1>
       {/* filtrar */}
-      <form >
-        <label >Nombre:</label>
+      <form className='formFilter'>
+        <label className='label'>Nombre:</label>
         <input 
+          className='input'
           type="search"
           placeholder='Ej: Maricarmen' 
           onChange={handleFilter}
         />
-        <label >Escoge una tutora:</label>
-        <select name="counselor" id="counselor" onChange={handleSelect} >
+        <label className='label'>Escoge una tutora:</label>
+        <select className="input select" name="counselor" id="counselor" onChange={handleSelect} >
           <option value="Escoge una opción">Escoge una opción</option>
           <option value="Dayana">Dayana</option>
           <option value="Yanelis">Yanelis</option>
@@ -78,10 +86,11 @@ function App() {
       <table className="table">
   {/* <!-- Fila de cabecera --> */}
         <thead>
-          <tr>
-            <th>Nombre</th>
+          <tr className='row'>
+            <th className='column'>Nombre</th>
             <th>Tutora</th>
             <th>Especialidad</th>
+            <th>Redes sociales</th>
           </tr>
         </thead>
         <tbody>
@@ -118,9 +127,6 @@ function App() {
           onClick={handleClick}
         />
       </form>
-
-
-     
     </div>
   );
 }
