@@ -40,10 +40,12 @@ function App() {
 
   // FUNCIONES Y VARIABLES QUE AYUDEN A RENDERIZAR HTML
   function renderSocialNetworks(socialNetworks){
-    return socialNetworks.map((socialNetwork) => {
-        return (<a target="_blank" href={socialNetwork.url}>{socialNetwork.name}</a>);
-    });
-  }
+    if (socialNetworks) {
+     return socialNetworks.map((socialNetwork) => {
+      return (<a target="_blank" href={socialNetwork.url}>{socialNetwork.name}</a>);
+     });
+    }
+     }
 
   const renderAdalabers = data
   .filter ((data)=>teacherFilter === 'Escoge una opción' || 
