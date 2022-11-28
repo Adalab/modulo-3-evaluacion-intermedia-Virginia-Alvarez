@@ -51,11 +51,11 @@ function App() {
   .filter ((data)=>data.name.toLowerCase().includes(nameFilter.toLowerCase()))
   .map((adalaber)=>{
     return (
-        <tr key={adalaber.id}>
-            <td>{adalaber.name}</td>
-            <td>{adalaber.counselor}</td>
-            <td>{adalaber.speciality}</td>
-            <td>{renderSocialNetworks(adalaber.social_networks)}</td>
+        <tr  className="row" key={adalaber.id}>
+            <td className="column">{adalaber.name}</td>
+            <td className="column">{adalaber.counselor}</td>
+            <td className="column">{adalaber.speciality}</td>
+            <td className="column">{renderSocialNetworks(adalaber.social_networks)}</td>
         </tr>
     )
   })
@@ -88,9 +88,9 @@ function App() {
         <thead>
           <tr className='row'>
             <th className='column'>Nombre</th>
-            <th>Tutora</th>
-            <th>Especialidad</th>
-            <th>Redes sociales</th>
+            <th className='column'>Tutora</th>
+            <th className='column'>Especialidad</th>
+            <th className='column'>Redes sociales</th>
           </tr>
         </thead>
         <tbody>
