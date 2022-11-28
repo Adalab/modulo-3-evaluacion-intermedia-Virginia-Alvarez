@@ -1,18 +1,25 @@
 import '../styles/App.scss';
-import students from '../data/data.json';
-import {useState} from 'react';
+import callToApi from '../services/api.js';
+import {useState, useEffect} from 'react';
 
 function App() {
   // VARIABLES ESTADO
-  const [data, setData]= useState (students.results);
+  const [data, setData]= useState ([]);
   const [newStudent, setNewStudent] = useState ({
     id: "",
     name: "",
     counselor: "",
     speciality: "",
   });
+  const [nameFilter, setNameFilter] = useState("");
+  const [teacherFilter, setTeacherFilter] = useState("Escoge una opción");
 
   // USEEFFECT ?
+  useEffect(() => {
+    callToApi().then((response) => {     
+          setData(response);
+    })
+  }, []);
 
   // FUNCIONES HANDLER
 
@@ -23,9 +30,20 @@ function App() {
     ev.preventDefault();
     setData([...data,newStudent]);
   }
+  const handleFilter=(ev)=>{
+    setNameFilter(ev.target.value);
+
+   };
+ const handleSelect = (ev)=>{
+  setTeacherFilter(ev.target.value);
+ };
 
   // FUNCIONES Y VARIABLES QUE AYUDEN A RENDERIZAR HTML
-  const renderAdalabers = data.map((adalaber)=>{
+  const renderAdalabers = data
+  .filter ((data)=>teacherFilter === 'Escoge una opción' || 
+                            data.counselor === teacherFilter)
+  .filter ((data)=>data.name.toLowerCase().includes(nameFilter.toLowerCase()))
+  .map((adalaber)=>{
     return (
         <tr key={adalaber.id}>
             <td>{adalaber.name}</td>
@@ -44,12 +62,12 @@ function App() {
       <form >
         <label >Nombre:</label>
         <input 
-          type="text"
-          value=""
+          type="search"
           placeholder='Ej: Maricarmen' 
+          onChange={handleFilter}
         />
         <label >Escoge una tutora:</label>
-        <select name="" id="">
+        <select name="counselor" id="counselor" onChange={handleSelect} >
           <option value="Escoge una opción">Escoge una opción</option>
           <option value="Dayana">Dayana</option>
           <option value="Yanelis">Yanelis</option>
